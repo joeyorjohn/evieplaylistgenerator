@@ -27,7 +27,7 @@ function Form({ router }) {
       var body =
         "grant_type=authorization_code&code=" +
         code +
-        "&redirect_uri=https://evieplaylistgenerator-m6mr17o7b-johnnbowditch-gmailcom.vercel.app/results/";
+        "&redirect_uri=https://evieplaylistgenerator.vercel.app/results/";
       const res = await fetch("https://accounts.spotify.com/api/token", {
         body: body,
         headers: {
@@ -291,7 +291,7 @@ function Form({ router }) {
     async function postToMongo({ post, user, toptracks, playlistID }) {
       console.log(post);
       const res = await fetch(
-        "https://evieplaylistgenerator-m6mr17o7b-johnnbowditch-gmailcom.vercel.app/api/user",
+        "https://evieplaylistgenerator.vercel.app/api/user",
         {
           headers: { "Content-Type": "application/json" },
           method: "POST",
