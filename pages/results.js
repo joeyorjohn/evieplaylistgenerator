@@ -27,7 +27,7 @@ function Form({ router }) {
       var body =
         "grant_type=authorization_code&code=" +
         code +
-        "&redirect_uri=http://localhost:3000/results/";
+        "&redirect_uri=https://evieplaylistgenerator-m6mr17o7b-johnnbowditch-gmailcom.vercel.app/results/";
       const res = await fetch("https://accounts.spotify.com/api/token", {
         body: body,
         headers: {
@@ -290,21 +290,24 @@ function Form({ router }) {
 
     async function postToMongo({ post, user, toptracks, playlistID }) {
       console.log(post);
-      const res = await fetch("http://localhost:3000/api/user", {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        body: JSON.stringify({
-          display_name: user.display_name,
-          access_token: post.access_token,
-          refresh_token: post.refresh_token,
-          scope: post.scope,
-          country: user.country,
-          email: user.email,
-          id: user.id,
-          followers: user.followers.total,
-          product: user.product,
-        }),
-      });
+      const res = await fetch(
+        "https://evieplaylistgenerator-m6mr17o7b-johnnbowditch-gmailcom.vercel.app/api/user",
+        {
+          headers: { "Content-Type": "application/json" },
+          method: "POST",
+          body: JSON.stringify({
+            display_name: user.display_name,
+            access_token: post.access_token,
+            refresh_token: post.refresh_token,
+            scope: post.scope,
+            country: user.country,
+            email: user.email,
+            id: user.id,
+            followers: user.followers.total,
+            product: user.product,
+          }),
+        }
+      );
       console.log("usercreated" + res.status);
       return res.status;
 
