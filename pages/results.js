@@ -13,6 +13,26 @@ function Form({ router }) {
   const [playlistLink, setPlaylistLink] = useState();
   const [props, setProps] = useState();
 
+  function shuffle(array) {
+    var currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
+  }
+
   useEffect(() => {
     async function extractCode() {
       const queryKey = "code";
@@ -157,17 +177,57 @@ function Form({ router }) {
 
     //NEED TO UPDATE
     //Choose which song are added to the playlist
-    function sortTracksByAudioFeatures(audioFeatures) {
+    //
+    function sortTracksByAudioFeatures({ userScore, audioFeatures }) {
       var sortedTracks = [];
       var i;
-      for (i = 0; i < 50; i++) {
-        if (
-          audioFeatures.audio_features[i].valence >= 0.5 &&
-          audioFeatures.audio_features[i].valence <= 1
-        ) {
-          sortedTracks.push(audioFeatures.audio_features[i].id);
+      if (userScore >= 50) {
+        for (i = 0; i < 50; i++) {
+          if (
+            audioFeatures.audio_features[i].valence >= 0.5 &&
+            audioFeatures.audio_features[i].valence <= 1
+          ) {
+            sortedTracks.push(audioFeatures.audio_features[i].id);
+          }
         }
+        sortedTracks.push([
+          [
+            "4s1b7hjeIkpZwBSSr6cGhp",
+            "0TrPqhAMoaKUFLR7iYDokf",
+            "0zzVTGyRrWpQu8Fr28NRAv",
+            "24ySl2hOPGCDcxBxFIqWBu",
+            "7HMmFQsKsljwTw8bS7lu19",
+            "4YKcx7YxznAdBefrYdCZ9P",
+            "5IUOU5xkzGHsRFOYNu3GSK",
+            "2Rb4Dey8TXM6A2R3QQaJPn",
+            "0AnZrWo2TuUX5BnFjsoy3N",
+            "6lyjWvSUgYtX26zfrQ6gn8",
+          ],
+        ]);
+      } else {
+        for (i = 0; i < 50; i++) {
+          if (
+            audioFeatures.audio_features[i].valence >= 0 &&
+            audioFeatures.audio_features[i].valence <= 0.5
+          ) {
+            sortedTracks.push(audioFeatures.audio_features[i].id);
+          }
+        }
+        sortedTracks.push([
+          "45XF1g06KdLuT5Mad8dmrI",
+          "2WyRfGeHo97VC5mP1BBSzr",
+          "1qYlzlWIWRaEGF9Qjf0T2P",
+          "5E30LdtzQTGqRvNd7l6kG5",
+          "6IbnUaczZBT34DhaD6S18F",
+          "052vSBPxqdmYRDlkSPiavc",
+          "0XyjtybwqSdqMAFfBEkmZf",
+          "04aAxqtGp5pv12UXAg4pkq",
+          "6Qn5zhYkTa37e91HC1D7lb",
+          "6i0V12jOa3mr6uu4WYhUBr",
+        ]);
       }
+      console.log("sortedTracks");
+      console.log(sortedTracks);
       return sortedTracks;
     }
 
@@ -181,15 +241,19 @@ function Form({ router }) {
       console.log("data");
 
       console.log(data);
-      if (data != null) {
-        for (i = 0; i < 20; i++) {
-          if (data.items[i].name == playlist_name) {
-            const result = data.items[i].id;
-            return result;
-          } else {
-            return null;
+      try {
+        if (data != null) {
+          for (i = 0; i < 20; i++) {
+            if (data.items[i].name == playlist_name) {
+              const result = data.items[i].id;
+              return result;
+            } else {
+              return null;
+            }
           }
         }
+      } catch (err) {
+        return null;
       }
     }
 
@@ -378,8 +442,13 @@ function Form({ router }) {
       const playl = "https://open.spotify.com/playlist/" + playlistID;
       setPlaylistLink(playl);
       setPlaylistName(playlist_name);
-      const sortedTracks = await sortTracksByAudioFeatures(audioFeatures);
+      const sortedTracks = await sortTracksByAudioFeatures(
+        userScore,
+        audioFeatures
+      );
       console.log(sortedTracks);
+      await shuffle(sortedTracks);
+      console.log("SHUFFLED");
       console.log(sortedTracks);
       const addTracks = await addTracksToPlaylist({
         auth,
@@ -416,7 +485,7 @@ function Form({ router }) {
     return <Loading />;
   } else if (score <= 50) {
     return (
-      <Optimist
+      <Pessimist
         score={score}
         playlistname={playlistName}
         playlistlink={playlistLink}
@@ -424,7 +493,7 @@ function Form({ router }) {
     );
   } else {
     return (
-      <Pessimist
+      <Optimist
         score={score}
         playlistname={playlistName}
         playlistlink={playlistLink}
