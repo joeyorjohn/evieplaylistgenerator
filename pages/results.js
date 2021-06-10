@@ -438,7 +438,6 @@ function Form({ router }) {
       let userScore = averageResults.valence.toString();
       userScore = userScore.substr(2, 2);
       const resultScore = parseInt(userScore);
-      setScore(resultScore);
       const playl = "https://open.spotify.com/playlist/" + playlistID;
       setPlaylistLink(playl);
       setPlaylistName(playlist_name);
@@ -474,6 +473,7 @@ function Form({ router }) {
         auth,
         tracksToSave,
       });
+      await setScore(resultScore);
 
       //await uploadPlaylistImage({ auth, playlistID });
     }
