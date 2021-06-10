@@ -191,18 +191,16 @@ function Form({ router }) {
           }
         }
         sortedTracks.push([
-          [
-            "4s1b7hjeIkpZwBSSr6cGhp",
-            "0TrPqhAMoaKUFLR7iYDokf",
-            "0zzVTGyRrWpQu8Fr28NRAv",
-            "24ySl2hOPGCDcxBxFIqWBu",
-            "7HMmFQsKsljwTw8bS7lu19",
-            "4YKcx7YxznAdBefrYdCZ9P",
-            "5IUOU5xkzGHsRFOYNu3GSK",
-            "2Rb4Dey8TXM6A2R3QQaJPn",
-            "0AnZrWo2TuUX5BnFjsoy3N",
-            "6lyjWvSUgYtX26zfrQ6gn8",
-          ],
+          "4s1b7hjeIkpZwBSSr6cGhp",
+          "0TrPqhAMoaKUFLR7iYDokf",
+          "0zzVTGyRrWpQu8Fr28NRAv",
+          "24ySl2hOPGCDcxBxFIqWBu",
+          "7HMmFQsKsljwTw8bS7lu19",
+          "4YKcx7YxznAdBefrYdCZ9P",
+          "5IUOU5xkzGHsRFOYNu3GSK",
+          "2Rb4Dey8TXM6A2R3QQaJPn",
+          "0AnZrWo2TuUX5BnFjsoy3N",
+          "6lyjWvSUgYtX26zfrQ6gn8",
         ]);
       } else {
         for (i = 0; i < 50; i++) {
