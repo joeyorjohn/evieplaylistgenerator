@@ -87,7 +87,9 @@ function Form({ router }) {
     async function getTrackIDs(toptracks) {
       var trackids = [];
       var i;
-      for (i = 0; i < 50; i++) {
+      var arrayLength = toptracks.items.length;
+
+      for (i = 0; i < arrayLength; i++) {
         trackids.push(toptracks.items[i].id);
       }
       return trackids;
@@ -182,7 +184,7 @@ function Form({ router }) {
       var sortedTracks = [];
       var i;
       var arrayLength = audioFeatures.length;
-
+      console.log(arrayLength);
       console.log("audioFeatures");
 
       console.log(audioFeatures);
