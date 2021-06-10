@@ -181,11 +181,13 @@ function Form({ router }) {
     function sortTracksByAudioFeatures({ userScore, audioFeatures }) {
       var sortedTracks = [];
       var i;
+      var arrayLength = audioFeatures.length;
+
       console.log("audioFeatures");
 
       console.log(audioFeatures);
       if (userScore >= 50) {
-        for (i = 0; i < 50; i++) {
+        for (i = 0; i < arrayLength; i++) {
           if (
             audioFeatures.audio_features[i].valence >= 0.5 &&
             audioFeatures.audio_features[i].valence <= 1
@@ -206,7 +208,7 @@ function Form({ router }) {
           "6lyjWvSUgYtX26zfrQ6gn8"
         );
       } else {
-        for (i = 0; i < 50; i++) {
+        for (i = 0; i < arrayLength; i++) {
           if (
             audioFeatures.audio_features[i].valence >= 0 &&
             audioFeatures.audio_features[i].valence <= 0.5
