@@ -181,6 +181,9 @@ function Form({ router }) {
     function sortTracksByAudioFeatures({ userScore, audioFeatures }) {
       var sortedTracks = [];
       var i;
+      console.log("audioFeatures");
+
+      console.log(audioFeatures);
       if (userScore >= 50) {
         for (i = 0; i < 50; i++) {
           if (
@@ -190,7 +193,7 @@ function Form({ router }) {
             sortedTracks.push(audioFeatures.audio_features[i].id);
           }
         }
-        sortedTracks.push([
+        sortedTracks.push(
           "4s1b7hjeIkpZwBSSr6cGhp",
           "0TrPqhAMoaKUFLR7iYDokf",
           "0zzVTGyRrWpQu8Fr28NRAv",
@@ -200,8 +203,8 @@ function Form({ router }) {
           "5IUOU5xkzGHsRFOYNu3GSK",
           "2Rb4Dey8TXM6A2R3QQaJPn",
           "0AnZrWo2TuUX5BnFjsoy3N",
-          "6lyjWvSUgYtX26zfrQ6gn8",
-        ]);
+          "6lyjWvSUgYtX26zfrQ6gn8"
+        );
       } else {
         for (i = 0; i < 50; i++) {
           if (
@@ -211,7 +214,7 @@ function Form({ router }) {
             sortedTracks.push(audioFeatures.audio_features[i].id);
           }
         }
-        sortedTracks.push([
+        sortedTracks.push(
           "45XF1g06KdLuT5Mad8dmrI",
           "2WyRfGeHo97VC5mP1BBSzr",
           "1qYlzlWIWRaEGF9Qjf0T2P",
@@ -221,8 +224,8 @@ function Form({ router }) {
           "0XyjtybwqSdqMAFfBEkmZf",
           "04aAxqtGp5pv12UXAg4pkq",
           "6Qn5zhYkTa37e91HC1D7lb",
-          "6i0V12jOa3mr6uu4WYhUBr",
-        ]);
+          "6i0V12jOa3mr6uu4WYhUBr"
+        );
       }
       console.log("sortedTracks");
       console.log(sortedTracks);
@@ -439,10 +442,10 @@ function Form({ router }) {
       const playl = "https://open.spotify.com/playlist/" + playlistID;
       setPlaylistLink(playl);
       setPlaylistName(playlist_name);
-      const sortedTracks = await sortTracksByAudioFeatures(
+      const sortedTracks = await sortTracksByAudioFeatures({
         userScore,
-        audioFeatures
-      );
+        audioFeatures,
+      });
       console.log(sortedTracks);
       await shuffle(sortedTracks);
       console.log("SHUFFLED");
