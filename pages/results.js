@@ -52,7 +52,8 @@ function Form({ router }) {
         body: body,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `${process.env.NEXT_PUBLIC_SPOTIFY_ENCODED_KEYS}`,
+          Authorization:
+            "Basic NzZjYTNlYmVlOGEwNDdhMmFjY2NhODQ3MTAxNzExNGY6YjVmYjVhNTcwYzc3NDc5OThiNDQ2Mjg5MmZhMzM2NDg=",
         },
         method: "POST",
       });
