@@ -52,8 +52,7 @@ function Form({ router }) {
         body: body,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-          Authorization:
-            "Basic NzZjYTNlYmVlOGEwNDdhMmFjY2NhODQ3MTAxNzExNGY6YjVmYjVhNTcwYzc3NDc5OThiNDQ2Mjg5MmZhMzM2NDg=",
+          Authorization: `${process.env.NEXT_PUBLIC_SPOTIFY_ENCODED_KEYS}`,
         },
         method: "POST",
       });
@@ -107,74 +106,81 @@ function Form({ router }) {
     async function getAverageResults(audioFeatures) {
       var averagefeatures = {};
 
-      //acousticness
-      var acousticnesss = Object.entries(audioFeatures.audio_features).map(
-        (el) => el[1].acousticness
-      );
-      var acousticness =
-        acousticnesss.reduce((a, c) => a + c) / acousticnesss.length;
-      averagefeatures.acousticness = acousticness;
+      try {
+        //acousticness
+        var acousticnesss = Object.entries(audioFeatures.audio_features).map(
+          (el) => el[1].acousticness
+        );
+        var acousticness =
+          acousticnesss.reduce((a, c) => a + c) / acousticnesss.length;
+        averagefeatures.acousticness = acousticness;
 
-      //DANCEABILITY
-      var danceabilitys = Object.entries(audioFeatures.audio_features).map(
-        (el) => el[1].danceability
-      );
-      var danceability =
-        danceabilitys.reduce((a, c) => a + c) / danceabilitys.length;
-      averagefeatures.danceability = danceability;
+        //DANCEABILITY
+        var danceabilitys = Object.entries(audioFeatures.audio_features).map(
+          (el) => el[1].danceability
+        );
+        var danceability =
+          danceabilitys.reduce((a, c) => a + c) / danceabilitys.length;
+        averagefeatures.danceability = danceability;
 
-      //energy
-      var energys = Object.entries(audioFeatures.audio_features).map(
-        (el) => el[1].energy
-      );
-      var energy = energys.reduce((a, c) => a + c) / energys.length;
-      averagefeatures.energy = energy;
+        //energy
+        var energys = Object.entries(audioFeatures.audio_features).map(
+          (el) => el[1].energy
+        );
+        var energy = energys.reduce((a, c) => a + c) / energys.length;
+        averagefeatures.energy = energy;
 
-      //instrumentalness
-      var instrumentalnesss = Object.entries(audioFeatures.audio_features).map(
-        (el) => el[1].instrumentalness
-      );
-      var instrumentalness =
-        instrumentalnesss.reduce((a, c) => a + c) / instrumentalnesss.length;
-      averagefeatures.instrumentalness = instrumentalness;
+        //instrumentalness
+        var instrumentalnesss = Object.entries(
+          audioFeatures.audio_features
+        ).map((el) => el[1].instrumentalness);
+        var instrumentalness =
+          instrumentalnesss.reduce((a, c) => a + c) / instrumentalnesss.length;
+        averagefeatures.instrumentalness = instrumentalness;
 
-      //liveness
-      var livenesss = Object.entries(audioFeatures.audio_features).map(
-        (el) => el[1].liveness
-      );
-      var liveness = livenesss.reduce((a, c) => a + c) / livenesss.length;
-      averagefeatures.liveness = liveness;
+        //liveness
+        var livenesss = Object.entries(audioFeatures.audio_features).map(
+          (el) => el[1].liveness
+        );
+        var liveness = livenesss.reduce((a, c) => a + c) / livenesss.length;
+        averagefeatures.liveness = liveness;
 
-      //loudness
-      var loudnesss = Object.entries(audioFeatures.audio_features).map(
-        (el) => el[1].loudness
-      );
-      var loudness = loudnesss.reduce((a, c) => a + c) / loudnesss.length;
-      averagefeatures.loudness = loudness;
+        //loudness
+        var loudnesss = Object.entries(audioFeatures.audio_features).map(
+          (el) => el[1].loudness
+        );
+        var loudness = loudnesss.reduce((a, c) => a + c) / loudnesss.length;
+        averagefeatures.loudness = loudness;
 
-      //speechiness
-      var speechinesss = Object.entries(audioFeatures.audio_features).map(
-        (el) => el[1].speechiness
-      );
-      var speechiness =
-        speechinesss.reduce((a, c) => a + c) / speechinesss.length;
-      averagefeatures.speechiness = speechiness;
+        //speechiness
+        var speechinesss = Object.entries(audioFeatures.audio_features).map(
+          (el) => el[1].speechiness
+        );
+        var speechiness =
+          speechinesss.reduce((a, c) => a + c) / speechinesss.length;
+        averagefeatures.speechiness = speechiness;
 
-      //tempo
-      var tempos = Object.entries(audioFeatures.audio_features).map(
-        (el) => el[1].tempo
-      );
-      var tempo = tempos.reduce((a, c) => a + c) / tempos.length;
-      averagefeatures.tempo = tempo;
+        //tempo
+        var tempos = Object.entries(audioFeatures.audio_features).map(
+          (el) => el[1].tempo
+        );
+        var tempo = tempos.reduce((a, c) => a + c) / tempos.length;
+        averagefeatures.tempo = tempo;
 
-      //tempo
-      var valences = Object.entries(audioFeatures.audio_features).map(
-        (el) => el[1].valence
-      );
-      var valence = valences.reduce((a, c) => a + c) / valences.length;
-      averagefeatures.valence = valence;
+        //tempo
+        var valences = Object.entries(audioFeatures.audio_features).map(
+          (el) => el[1].valence
+        );
+        var valence = valences.reduce((a, c) => a + c) / valences.length;
+        averagefeatures.valence = valence;
 
-      return averagefeatures;
+        return averagefeatures;
+      } catch {
+        return {
+          ///THIS IS WHAT WILL BE RETURNED IF THER ARE NO AVERAGE FEATURES
+          valence: 0.5,
+        };
+      }
     }
 
     //NEED TO UPDATE
