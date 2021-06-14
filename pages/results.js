@@ -196,14 +196,6 @@ function Form({ router }) {
 
       console.log(audioFeatures);
       if (userScore >= 50) {
-        for (i = 0; i < arrayLength; i++) {
-          if (
-            audioFeatures.audio_features[i].valence >= 0.5 &&
-            audioFeatures.audio_features[i].valence <= 1
-          ) {
-            sortedTracks.push(audioFeatures.audio_features[i].id);
-          }
-        }
         sortedTracks.push(
           "4s1b7hjeIkpZwBSSr6cGhp",
           "0TrPqhAMoaKUFLR7iYDokf",
@@ -216,15 +208,15 @@ function Form({ router }) {
           "0AnZrWo2TuUX5BnFjsoy3N",
           "6lyjWvSUgYtX26zfrQ6gn8"
         );
-      } else {
         for (i = 0; i < arrayLength; i++) {
           if (
-            audioFeatures.audio_features[i].valence >= 0 &&
-            audioFeatures.audio_features[i].valence <= 0.5
+            audioFeatures.audio_features[i].valence >= 0.5 &&
+            audioFeatures.audio_features[i].valence <= 1
           ) {
             sortedTracks.push(audioFeatures.audio_features[i].id);
           }
         }
+      } else {
         sortedTracks.push(
           "45XF1g06KdLuT5Mad8dmrI",
           "2WyRfGeHo97VC5mP1BBSzr",
@@ -237,6 +229,14 @@ function Form({ router }) {
           "6Qn5zhYkTa37e91HC1D7lb",
           "6i0V12jOa3mr6uu4WYhUBr"
         );
+        for (i = 0; i < arrayLength; i++) {
+          if (
+            audioFeatures.audio_features[i].valence >= 0 &&
+            audioFeatures.audio_features[i].valence <= 0.5
+          ) {
+            sortedTracks.push(audioFeatures.audio_features[i].id);
+          }
+        }
       }
       console.log("sortedTracks");
       console.log(sortedTracks);
