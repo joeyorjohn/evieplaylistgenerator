@@ -179,7 +179,7 @@ function Form({ router }) {
       } catch {
         return {
           ///THIS IS WHAT WILL BE RETURNED IF THER ARE NO AVERAGE FEATURES
-          valence: 0.5,
+          valence: 51,
         };
       }
     }
@@ -190,9 +190,11 @@ function Form({ router }) {
     function sortTracksByAudioFeatures({ userScore, audioFeatures }) {
       var sortedTracks = [];
       var i;
-      var arrayLength = audioFeatures.length;
+
+      const arrayLength = Object.keys(audioFeatures.audio_features).length;
+
+      console.log("arrayLength");
       console.log(arrayLength);
-      console.log("audioFeatures");
 
       console.log(audioFeatures);
       if (userScore >= 50) {
@@ -208,13 +210,17 @@ function Form({ router }) {
           "0AnZrWo2TuUX5BnFjsoy3N",
           "6lyjWvSUgYtX26zfrQ6gn8"
         );
-        for (i = 0; i < arrayLength; i++) {
-          if (
-            audioFeatures.audio_features[i].valence >= 0.5 &&
-            audioFeatures.audio_features[i].valence <= 1
-          ) {
-            sortedTracks.push(audioFeatures.audio_features[i].id);
+        try {
+          for (i = 0; i < arrayLength; i++) {
+            if (
+              audioFeatures.audio_features[i].valence >= 0.5 &&
+              audioFeatures.audio_features[i].valence <= 1
+            ) {
+              sortedTracks.push(audioFeatures.audio_features[i].id);
+            }
           }
+        } catch {
+          return sortedTracks;
         }
       } else {
         sortedTracks.push(
@@ -229,13 +235,17 @@ function Form({ router }) {
           "6Qn5zhYkTa37e91HC1D7lb",
           "6i0V12jOa3mr6uu4WYhUBr"
         );
-        for (i = 0; i < arrayLength; i++) {
-          if (
-            audioFeatures.audio_features[i].valence >= 0 &&
-            audioFeatures.audio_features[i].valence <= 0.5
-          ) {
-            sortedTracks.push(audioFeatures.audio_features[i].id);
+        try {
+          for (i = 0; i < arrayLength; i++) {
+            if (
+              audioFeatures.audio_features[i].valence >= 0 &&
+              audioFeatures.audio_features[i].valence <= 0.5
+            ) {
+              sortedTracks.push(audioFeatures.audio_features[i].id);
+            }
           }
+        } catch {
+          return sortedTracks;
         }
       }
       console.log("sortedTracks");
