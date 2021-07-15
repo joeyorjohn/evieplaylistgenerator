@@ -20,7 +20,7 @@ export default function Form() {
           <div className="flex-col flex items-center">
             <a
               className=""
-              href="https://accounts.spotify.com/authorize?client_id=76ca3ebee8a047a2accca8471017114f&redirect_uri=https://evieplaylistgenerator.vercel.app/results/&scope=user-read-email ugc-image-upload user-top-read playlist-modify-public user-modify-playback-state playlist-modify-private user-follow-modify user-library-modify user-read-private playlist-read-private&response_type=code&show_dialog=true"
+              href="https://accounts.spotify.com/authorize?client_id=ca663acd44cd4339be173cae82d02b75&redirect_uri=https://evieplaylistgenerator.vercel.app/results/&scope=user-read-email ugc-image-upload user-top-read playlist-modify-public user-modify-playback-state playlist-modify-private user-follow-modify user-library-modify user-read-private playlist-read-private&response_type=code&show_dialog=true"
             >
               <button className="bg-green px-6 py-3 rounded-3xl text-white flex">
                 <img
