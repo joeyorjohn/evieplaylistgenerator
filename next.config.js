@@ -4,8 +4,8 @@
 // after learning more below.
 const securityHeaders = [
   {
-    key: "X-Frame-Options",
-    value: "SAMEORIGIN",
+    key: "Content-Security-Policy",
+    value: "default-src 'self' umusic.digital *.umusic.digital",
   },
 ];
 
